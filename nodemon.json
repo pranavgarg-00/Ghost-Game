@@ -1,0 +1,11 @@
+{
+    "watch": [
+      "server/**/*",
+      "util/**/*",
+      "node_modules/**/*",
+      ".env",
+      "knexfile.js",
+      "package.json"
+    ]
+  }
+  
