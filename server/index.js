@@ -16,8 +16,8 @@ const { format } = require('path');
 
 //midleware
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); //req.body
+app.use(express.urlencoded({ extended: true })); 
 
 const logConfig = {
     exitOnError: false,
