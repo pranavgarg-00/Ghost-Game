@@ -25,7 +25,6 @@
     "morgan": "^1.10.0",
     "pg": "^8.7.1",
     "pgtools": "^0.3.2",
-    "webpack": "^5.65.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {
