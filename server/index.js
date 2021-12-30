@@ -47,33 +47,6 @@ const port = process.env.PORT || 80;
 
 //ROUTES//
 
-// //POST : CREATE
-// app.post('/', (req, res) => {
-//     const name = req.body.name ? req.body.name : '';
-//     //const email = req.body.email ? req.body.email : '';
-
-//     if (!name) {
-//         return res.json({success: false, message: 'Name is required'});
-//     }
-//     knex('users')
-//         .insert({name})
-//         .then((id) => {
-//         //get user by id
-//         knex('users')
-//             .select({
-//             id: 'id',
-//             name: 'name'
-//         })
-//             .where({id})
-//             .then((user) => {
-//             return res.json(user[0]);
-//         })
-//     })
-//     .catch((err) => {
-//         console.error(err);
-//         return res.json({success: false, message: 'error occured'});
-//     })
-// });
 
 app.use(errorHandler(logger));
 app.use(httpLogger(logger));

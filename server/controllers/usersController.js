@@ -37,24 +37,6 @@ async function create(req, res) {
     if (!name) {
         return res.json({success: false, message: 'Name is required'});
     }
-    // knex('users')
-    //     .returning('id')
-    //     .insert({name})
-    //     .then((id) => {
-    //     //get user by id
-    //     knex('users').select({
-    //         id: 'id',
-    //         name: 'name'
-    //     })
-    //         .where({id : id[0]})
-    //         .then((user) => {
-    //         return res.status(HTTP.StatusCodes.OK).json(user[0]);
-    //     })
-    // })
-    //     .catch((err) => {
-    //     console.error(err);
-    //     return res.json({success: false, message: 'error occured outside'});
-    // });
     try {
         const id = await knex('users').returning('id').insert({name});
         //get user by id
@@ -69,8 +51,59 @@ async function create(req, res) {
         return res.json({success: false, message: 'error occured'});
     }
 }
+async function retrieve(req, res) {
+    try {
+        const { id } = req.params;
+
+        const user = await knex('users').select({
+            id: 'id',
+            name: 'name'
+        }).where({id});
+
+        return res.status(HTTP.StatusCodes.OK).json(user[0]);
+    } catch(err) {
+        console.error(err);
+        return res.json({success: false, message: 'error occured'});
+    }
+}
+async function update(req, res) {
+    try {
+        const { id } = req.params;
+        const { name } = req.body;
+
+        const idToUpdate = await knex('users').where({id})
+        .returning('id').update({name});
+
+        const updatedUser = await knex('users').select({
+            id: 'id',
+            name: 'name'
+        }).where({id : idToUpdate[0]});
+
+        res.status(HTTP.StatusCodes.OK).json(updatedUser[0]);
+    } catch(err) {
+        console.error(err);
+        return res.json({success: false, message: 'error occured'});
+    }
+}
+async function destroy(req, res) {
+    try {
+        const { id } = req.params;
+
+        const idToUpdate = await knex('users')
+            .returning(['id','name']).where({id}).delete();
+
+        res.status(HTTP.StatusCodes.OK).json(idToUpdate[0]);
+    } catch(err) {
+        console.error(err);
+        return res.json({success: false, message: 'error occured'});
+    }
+
+}
 
 module.exports = {
     index,
-    create
+    create,
+    retrieve,
+    update,
+    destroy
 }
