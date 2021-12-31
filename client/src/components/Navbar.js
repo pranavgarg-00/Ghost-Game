@@ -3,17 +3,28 @@ import {NavLink} from 'react-router-dom';
 
 function Navbar() {
     return (
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+        <nav className="navbar navbar-expand-md navbar-dark bg-dark p-0">
             <div className="container-fluid px-4 py-1">
                 <NavLink className="navbar-brand" to="/">
                     Ghost Game
                 </NavLink>
-                <div>
-                    <ul className = "navbar-nav ml-auto">
+                <button 
+                    type="button" 
+                    className="navbar-toggler"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="#navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle Navigation"
+                >
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarSupportedContent" >
+                    <ul className = "navbar-nav ms-auto gap-2 align-items-end">
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/">
                                 Home
-                                <span className="sr-only">(current)</span>
+                                {/* <span className="sr-only">(current)</span> */}
                             </NavLink>
                         </li>
                         <li className="nav-item">

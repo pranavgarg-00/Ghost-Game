@@ -4,19 +4,18 @@ import placeholder from '../assets/images/home.png';
 function Home() {
     return (
         <div className="home">
-            <div class="container">
-                <div class="row align-items-center my-5">
-                    <div class="col-lg-7">
-                        <img src={placeholder} alt='Home' class='img-fluid'/>
+            <div className="container">
+                <div className="row align-items-center my-5">
+                    <div className="col-lg-7">
+                        <img src={placeholder} alt='Home' className='img-fluid'/>
                     </div>
                 </div>
-                <div class="col-lg-5">
-                    <h1 class="font-weight-light">Home</h1>
+                <div className="col-lg-5">
+                    <h1 className="font-weight-light">Home</h1>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Duis congue ante nulla, id pretium augue elementum et. 
-                        Etiam convallis, neque sit amet vulputate tincidunt, 
-                        quam purus vehicula nibh, sit amet placerat nisi nisi id mi.
+                        The game of ghost is usually a written or spoken word game in 
+                        which players take turns adding letters to a growing word fragment, 
+                        trying not to be the one to complete a valid word.
                     </p>
                 </div>
             </div>
