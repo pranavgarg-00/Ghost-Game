@@ -47,13 +47,16 @@ const port = process.env.PORT || 80;
 
 //ROUTES//
 
+//test
+//console.log(path.resolve('client/public'));
+//console.log(path.join(path.resolve('client/public'), 'index.html'));
 
 app.use(errorHandler(logger));
 app.use(httpLogger(logger));
-//PUT : Update / Replace
-//DELETE : Delete
-app.use('/', router);
-app.use(notFoundHandler(logger));
+
+
+app.use(router( {publicPath : path.resolve('client/public')} ));
+//app.use(notFoundHandler());
 
 //Initalize web-app on selected port
 app.listen(port, () => {

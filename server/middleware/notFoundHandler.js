@@ -5,10 +5,10 @@ const HTTP = require('http-status-codes');
  * @param {winston.Logger} logger Log output
  * @return {e.RequestHandler} 404 handler
  */
-function notFoundHandler(logger) {
-  return (req, res, next) => {
+function notFoundHandler() {
+  return (req, res) => {
+    // logger.error(`404 || ${res.statusMessage} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
     res.status(HTTP.StatusCodes.NOT_FOUND).send("Page not found");
-    logger.error(`404 || ${res.statusMessage} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
   };
 }
 

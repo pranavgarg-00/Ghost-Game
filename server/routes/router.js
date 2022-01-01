@@ -1,24 +1,39 @@
 const express = require('express');
+const path = require('path');
 const usersController = require('../controllers/usersController');
+const notFoundHandler = require('../middleware/notFoundHandler');
 
 const router = new express.Router;
 //middleware
 
-//routes
-router.get('/users', usersController.index);
-router.post('/users', usersController.create);
-router.get('/users/:id', usersController.retrieve);
-router.put('/users/:id', usersController.update);
-router.delete('/users/:id', usersController.destroy);
+function file(path) {
+    return (req, res) => res.sendFile(path);
+}
 
-router.get('/home/:column/:order', function (req, res) {
-    const {column , order} = req.params;
-    res.send(column);
-})
+function routers({ publicPath } = {}, logger) {
+    const router = new express.Router;
+    // router.use('/api', responseType('json'));
+    router.get('/api/users', usersController.index);
+    router.post('/api/users', usersController.create);
+    router.get('/api//users/:id', usersController.retrieve);
+    router.put('/api/users/:id', usersController.update);
+    router.delete('/api/users/:id', usersController.destroy);
+    router.use('/api', notFoundHandler());
+    router.get('*', express.static(publicPath));
+    router.use(file(path.join(publicPath, "index.html")));
+    return router;
+}
+
+
+// router.get('/home/:column/:order', function (req, res) {
+//     const {column , order} = req.params;
+//     res.send(column);
+// })
   
-// About page route.
-router.get('/about', function (req, res) {
-    res.send('About this wiki');
-})
+// // About page route.
+// router.get('/about', function (req, res) {
+//     res.send('About this wiki');
+// })
 
-module.exports = router;
+
+module.exports = routers;
