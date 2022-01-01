@@ -10,26 +10,24 @@ import Remote from './Remote.js'
 import './App.css';
 
 function App() {
-  const queryClient = new QueryClient();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      {/* <Remote url={new URL('/api', document.location.origin)}> */}
-        <BrowserRouter>
-          <header>
-            <Navbar/>
-          </header>
-          <main>
-            <Switch>
-              <Route exact path={'/'} element={<Home/>} />
-              <Route exact path={'/play'} element={<Play/>} />
-              <Route exact path={'solve'} element={<Solver/>} />
-            </Switch>
-          </main>
-        </BrowserRouter>
-      {/* </Remote> */}
-    </QueryClientProvider>
   
+    <Remote url={new URL('/api', document.location.origin)}> 
+      <BrowserRouter>
+        <header>
+          <Navbar/>
+        </header>
+        <main>
+          <Switch>
+            <Route exact path={'/'} element={<Home/>} />
+            <Route exact path={'/play'} element={<Play/>} />
+            <Route exact path={'solve'} element={<Solver/>} />
+          </Switch>
+        </main>
+      </BrowserRouter>
+    </Remote>
+    
   )
 }
 

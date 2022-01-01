@@ -1,6 +1,5 @@
 import React from 'react';
-import { useQuery } from "react-query";
-// import { useMutation, useQuery, useQueryClient } from 'react-query';
+//import Request from 'request';
 
 const APIContext = React.createContext('Fetch');
 
