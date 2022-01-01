@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useContext } from "react";
+import React, {useState} from "react"; //useMemo, useContext } from "react";
 // import { APIContext } from "../Remote.js";
 // import CachedSolverResults from '../components/CachedSolverResults.js'
 import placeholder from '../assets/images/home.png';
@@ -9,13 +9,12 @@ import placeholder from '../assets/images/home.png';
 // });
 
 function Solver() {
-
     // const SolverAPI = useContext(APIContext);
     // const { data } = SolverAPI.index;
     // console.log(data);
 
     const [input, setInput] = useState('');
-    const [results, setResults] = useState([]);
+    //const [results, setResults] = useState([]);
 
     console.log(input);
     // const cachedQuerying = useMemo(() => new CachedSolverResults(search, setResults)
