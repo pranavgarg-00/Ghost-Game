@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Routes as Switch, Route} from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from 'react-query';
 import Navbar from './components/Navbar.js';
 import Home from './pages/Home.js'
 import Play from './pages/Play.js';

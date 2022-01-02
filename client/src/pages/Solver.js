@@ -1,27 +1,29 @@
-import React, {useState} from "react"; //useMemo, useContext } from "react";
-// import { APIContext } from "../Remote.js";
+import React, { useContext, useState } from "react"; 
+import { APIContext } from "../Remote.js";
 // import CachedSolverResults from '../components/CachedSolverResults.js'
 import placeholder from '../assets/images/home.png';
 
-// const solvedAPI = (remote) => ({
-//     // create : (body) => remote.query('solve', { method : 'GET'} )
-//     create : (body) => remote.query('users', { method : 'GET'} )
-// });
+const solvedAPI = (remote) => ({
+    // index : (body) => remote.query('solve', { method : 'GET'} )
+    index : () => remote.query('users', { method : 'GET'} )
+});
 
 function Solver() {
-    // const SolverAPI = useContext(APIContext);
-    // const { data } = SolverAPI.index;
-    // console.log(data);
-
+    const api = solvedAPI(useContext(APIContext));
+    
     const [input, setInput] = useState('');
-    //const [results, setResults] = useState([]);
+    const [results, setResults] = useState([]);
 
     console.log(input);
-    // const cachedQuerying = useMemo(() => new CachedSolverResults(search, setResults)
 
     function handleChange(e) {
-        //setInput(query);
         setInput(e.target.value);
+        api.index()
+            .then((results) => {
+                console.log(results);
+                setResults(results);
+            });
+        console.log(results);
     }
 
     // function 
@@ -56,6 +58,18 @@ function Solver() {
                         </div>
                     </div>
                 </form>
+            </div>
+            {/* Must update to create id if none */}
+            <div>
+                {(results?.length) ? results.map(person => (
+                
+                    <p key={person.id}>{person.name}</p>
+                )) : (
+                <div className={'list-group-item p-3 list-group-item-secondary text-muted'}>
+                  No Listings
+                </div>
+            )}
+                
             </div>
 
             <div className="container">

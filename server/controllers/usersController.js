@@ -15,7 +15,9 @@ const HTTP = require('http-status-codes');
             id: 'id',
             name: 'name'
         }); 
+        console.log(result);
         return res.status(HTTP.StatusCodes.OK).json(result);
+        //return res.status(HTTP.StatusCodes.OK).send(result.toJSON());
     } catch (err) {
         console.error(err);
         return res.json({success: false, message: 'error occured'});
