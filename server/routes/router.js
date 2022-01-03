@@ -12,10 +12,10 @@ function file(path) {
 
 function routers({ publicPath } = {}, logger) {
     const router = new express.Router;
-    // router.use('/api', responseType('json'));
-    router.get('/api/users', usersController.index);
+    //router.use('/api', responseType('json'));
+    router.get('/api/users', usersController.retrieve); 
     router.post('/api/users', usersController.create);
-    router.get('/api//users/:id', usersController.retrieve);
+    router.get('/api/users/all', usersController.index);
     router.put('/api/users/:id', usersController.update);
     router.delete('/api/users/:id', usersController.destroy);
     router.use('/api', notFoundHandler());

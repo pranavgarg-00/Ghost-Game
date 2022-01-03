@@ -20,8 +20,10 @@ class API {
             href = this.url.toString() + "/" + resource;
         }
         const endpoint = new URL(href);
-        // console.log(endpoint);
+        console.log(endpoint);
         if (params) new URLSearchParams(params).forEach((value, name) => endpoint.searchParams.append(name, value));
+        console.log("ENDPOINT WITH PARAMS BELOW");
+        console.log(endpoint);
         const response = await fetch(new Request(endpoint, params), {
             mode: 'same-origin',
             cache: 'no-cache',

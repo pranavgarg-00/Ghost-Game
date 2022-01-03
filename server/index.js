@@ -45,12 +45,6 @@ const logger = winston.createLogger(logConfig);
 //Look for local port to host the web application
 const port = process.env.PORT || 80;
 
-//ROUTES//
-
-//test
-//console.log(path.resolve('client/public'));
-//console.log(path.join(path.resolve('client/public'), 'index.html'));
-
 app.use(errorHandler(logger));
 app.use(httpLogger(logger));
 

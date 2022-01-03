@@ -17,7 +17,6 @@ const HTTP = require('http-status-codes');
         }); 
         console.log(result);
         return res.status(HTTP.StatusCodes.OK).json(result);
-        //return res.status(HTTP.StatusCodes.OK).send(result.toJSON());
     } catch (err) {
         console.error(err);
         return res.json({success: false, message: 'error occured'});
@@ -55,14 +54,18 @@ async function create(req, res) {
 }
 async function retrieve(req, res) {
     try {
-        const { id } = req.params;
+        const id = req.query.id;
+        console.log(id);
 
         const user = await knex('users').select({
             id: 'id',
             name: 'name'
         }).where({id});
-
-        return res.status(HTTP.StatusCodes.OK).json(user[0]);
+        console.log(user[0]);
+        if (user[0] == null) {
+            throw 'no results';
+        }
+        return res.status(HTTP.StatusCodes.OK).json([user[0]]);
     } catch(err) {
         console.error(err);
         return res.json({success: false, message: 'error occured'});

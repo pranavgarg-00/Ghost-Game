@@ -1,11 +1,13 @@
-import React, { useContext, useState } from "react"; 
+import React, { useContext, useState, useEffect } from "react"; 
 import { APIContext } from "../Remote.js";
 // import CachedSolverResults from '../components/CachedSolverResults.js'
 import cardImage from '../assets/images/card.png';
-//// <WordCard key={1} name={'Hello World'}/>
+
+
 const solvedAPI = (remote) => ({
     // index : (body) => remote.query('solve', { method : 'GET'} )
-    index : () => remote.query('users', { method : 'GET'} )
+    index : () => remote.query('users/all', { method : 'GET'}),
+    retrieve : (id) => remote.query('users', { method : 'GET', params: {id} })
 });
 
 const chunk = (arr, chunkSize, result = []) => {
@@ -26,7 +28,7 @@ const WordCard = (props) => {
                 <p className='card-text'>
                     Lorem ipsum dolor sit amet. Duis tellus.
                 </p>
-                <div className='btn btn-info'>
+                <div className='btn btn-secondary'>
                     See definition
                 </div>
             </div>
@@ -59,20 +61,30 @@ const WordList = (props) => {
 function Solver() {
 
     const api = solvedAPI(useContext(APIContext));
+
     
     const [input, setInput] = useState('');
     const [results, setResults] = useState([]);
 
     console.log(input);
 
-    function handleChange(e) {
-        setInput(e.target.value);
-        api.index()
-            .then((results) => {
+    useEffect(() => {
+        console.log(input);
+        if (input !== '') {
+            api.retrieve(input)
+                .then((results) => {
                 console.log(results);
                 setResults(results);
             });
-        console.log(results);
+            console.log(results);
+        }
+        // DONT GET RID OF BELOW LINE
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [input])
+
+    function handleChange(e) {
+        setInput(e.target.value);
     }
 
     // function 
