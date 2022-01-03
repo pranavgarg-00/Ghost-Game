@@ -1,14 +1,63 @@
 import React, { useContext, useState } from "react"; 
 import { APIContext } from "../Remote.js";
 // import CachedSolverResults from '../components/CachedSolverResults.js'
-import placeholder from '../assets/images/home.png';
-
+import cardImage from '../assets/images/card.png';
+//// <WordCard key={1} name={'Hello World'}/>
 const solvedAPI = (remote) => ({
     // index : (body) => remote.query('solve', { method : 'GET'} )
     index : () => remote.query('users', { method : 'GET'} )
 });
 
+const chunk = (arr, chunkSize, result = []) => {
+    if (chunkSize < 1) throw new Error('bad')
+    const temp = [...arr]
+    while (temp.length) {
+        result.push(temp.splice(0, chunkSize));
+    }
+    return result
+};
+
+const WordCard = (props) => {
+    const card = (
+        <div className='card bg-light'>
+            <img className='card-img-top img-fluid' src={cardImage} alt='Card top'/>
+            <div className='card-body'>
+                <h5 className='card-title'>{props.name}</h5>
+                <p className='card-text'>
+                    Lorem ipsum dolor sit amet. Duis tellus.
+                </p>
+                <div className='btn btn-info'>
+                    See definition
+                </div>
+            </div>
+        </div>
+    );
+    return card;
+
+}
+
+// Change col col-md-x to set grid params
+const WordList = (props) => {
+    const wordsChunks = chunk(props.words, 3);
+    const rows = wordsChunks.map((wordsChunk, index) => {
+        const wordCols = wordsChunk.map((word) => {
+            return (
+                <div className='col col-sm-4' key={word.id}>
+                    <WordCard key={word.id} name={word.name} />
+                </div>
+            );
+        }); 
+        return <div className='row mb-2' key={index}>{wordCols}</div>    
+    });
+    return (
+        <div className='Container'>
+            {rows}
+        </div>
+    )
+}
+
 function Solver() {
+
     const api = solvedAPI(useContext(APIContext));
     
     const [input, setInput] = useState('');
@@ -59,20 +108,18 @@ function Solver() {
                     </div>
                 </form>
             </div>
-            {/* Must update to create id if none */}
-            <div>
-                {(results?.length) ? results.map(person => (
-                
-                    <p key={person.id}>{person.name}</p>
-                )) : (
-                <div className={'list-group-item p-3 list-group-item-secondary text-muted'}>
-                  No Listings
-                </div>
-            )}
-                
+            
+            <div className='container mt-5'> 
+                {(results?.length) ? 
+                    (<WordList words={results} /> )    
+                    :
+                    (<div className={'list-group-item p-3 list-group-item-secondary text-muted'}>
+                        No Solutions
+                    </div>
+                    )}    
             </div>
 
-            <div className="container">
+            {/* <div className="container">
                 <div className="row align-items-center my-5">
                     <div className="col-lg-7">
                         <img src={placeholder} alt='Solver' className='img-fluid'/>
@@ -88,7 +135,7 @@ function Solver() {
                         </p>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }
