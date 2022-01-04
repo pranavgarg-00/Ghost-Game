@@ -1,13 +1,10 @@
 import React, { useContext, useState, useEffect } from "react"; 
 import { APIContext } from "../Remote.js";
-// import CachedSolverResults from '../components/CachedSolverResults.js'
 import cardImage from '../assets/images/card.png';
 
 
 const solvedAPI = (remote) => ({
-    // index : (body) => remote.query('solve', { method : 'GET'} )
     index : () => remote.query('users/all', { method : 'GET'}),
-    // retrieve : (id) => remote.query('users', { method : 'GET', params: {id} })
     retrieve : (id) => remote.query('solve', { method : 'GET', params: {id} })
 });
 

@@ -30,6 +30,34 @@ const runPy = (id) => {
     }
 )};
 
+/** Returns definition of word
+ *
+ * @type {e.RequestHandler}
+ * @param {e.request} req
+ * @param {e.Response} res payload with word and definition
+ */
+
+async function definition(req, res) {
+    try {
+        const id = req.query.id.toLowerCase();
+
+        const definition = dictionary.get(id);
+        if (definition === undefined) {
+            throw 'no word';
+        } 
+        const entry = {
+            id : 1,
+            word: id,
+            definition: definition
+        }
+        return res.status(HTTP.StatusCodes.OK).json([entry]);
+
+    } catch (err) {
+        console.error(err);
+        return res.json({success: false, message: 'error occured'});
+    }
+}
+
 /** Gets all words that match
  *
  * @type {e.RequestHandler}
@@ -39,8 +67,6 @@ const runPy = (id) => {
 
  async function retrieve(req, res) {
     try {
-        var dataToSend;
-
         const id = req.query.id.toLowerCase();
         console.log(id);
 
@@ -55,7 +81,7 @@ const runPy = (id) => {
                 definition: dictionary.get(data[1]),
                 winning: data[0]
             }
-            res.status(HTTP.StatusCodes.OK).json([entry]);
+            return res.status(HTTP.StatusCodes.OK).json([entry]);
         }).catch((err) => {
             console.error(err);
             return res.json({success: false, message: 'error occured'});
@@ -68,5 +94,6 @@ const runPy = (id) => {
 }
 
 module.exports = {
+    definition,
     retrieve
 }

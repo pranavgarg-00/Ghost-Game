@@ -21,7 +21,7 @@ function routers({ publicPath } = {}, logger) {
     router.delete('/api/users/:id', usersController.destroy);
 
     router.get('/api/solve', solverController.retrieve);
-    // router.get('/api/solve/all', solverController.index);    
+    router.get('/api/solve/dictionary', solverController.definition);    
     router.use('/api', notFoundHandler());
     router.get('*', express.static(publicPath));
     router.use(file(path.join(publicPath, "index.html")));
