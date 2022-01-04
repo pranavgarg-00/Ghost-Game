@@ -28,13 +28,13 @@ function Navbar() {
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/play">
-                                Play
+                            <NavLink className="nav-link" to="/solve">
+                                Solver
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/solve">
-                                Solver
+                            <NavLink className="nav-link" to="/play">
+                                Dictionary
                             </NavLink>
                         </li>
                     </ul>

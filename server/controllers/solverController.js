@@ -47,7 +47,6 @@ const runPy = (id) => {
         runPy(id).then((fromRunpy) => {
             const data = fromRunpy.toString().split(/\r?\n/);
             if (data[0].charAt(0) === 'e') {
-                console.log("TESTING");
                 throw 'No word';
             }
             const entry = {

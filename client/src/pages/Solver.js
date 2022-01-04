@@ -26,12 +26,17 @@ const WordCard = (props) => {
             <img className='card-img-top img-fluid' src={cardImage} alt='Card top'/>
             <div className='card-body'>
                 <h5 className='card-title'>{props.word}</h5>
-                <p className='card-text'>
-                    {/* Lorem ipsum dolor sit amet. Duis tellus. */}
-                    {props.definition}
-                </p>
-                <div className='btn btn-secondary'>
-                    See definition
+                <div className='collapse' id='define'>
+                    <p className='card-text'>
+                        {props.definition}
+                    </p>
+                </div>
+                <div className='btn btn-secondary' 
+                    data-bs-toggle='collapse' 
+                    data-bs-target='#define'
+                    aria-expanded='false'
+                    aria-controls='define'>
+                        See definition
                 </div>
             </div>
         </div>
@@ -72,14 +77,17 @@ function Solver() {
 
     useEffect(() => {
         console.log(input);
-        //const timeOutId = setTimeOut(() => setDisplayMessage(input), 500);
-        if (input !== '') {
-            api.retrieve(input)
-                .then((results) => {
-                setResults(results);
-            });
+        const timeOutId = setTimeout(() => {
+            if (input !== '') {
+                api.retrieve(input)
+                    .then((results) => {
+                    setResults(results);
+                });
             console.log(results);
-        }
+            }
+        }, 400);
+    
+        return () => clearTimeout(timeOutId);
         // DONT GET RID OF BELOW LINE
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -88,8 +96,6 @@ function Solver() {
     function handleChange(e) {
         setInput(e.target.value);
     }
-
-    // function 
 
     return (
         <div className="solver mt-3">
@@ -133,23 +139,6 @@ function Solver() {
                     )}    
             </div>
 
-            {/* <div className="container">
-                <div className="row align-items-center my-5">
-                    <div className="col-lg-7">
-                        <img src={placeholder} alt='Solver' className='img-fluid'/>
-                    </div>
-                
-                    <div className="fw-bolder col-lg-5">
-                        <h1>Solver</h1>
-                        <p className="fw-lighter">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Duis congue ante nulla, id pretium augue elementum et. 
-                            Etiam convallis, neque sit amet vulputate tincidunt, 
-                            quam purus vehicula nibh, sit amet placerat nisi nisi id mi.
-                        </p>
-                    </div>
-                </div>
-            </div> */}
         </div>
     )
 }
