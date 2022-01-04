@@ -7,7 +7,8 @@ import cardImage from '../assets/images/card.png';
 const solvedAPI = (remote) => ({
     // index : (body) => remote.query('solve', { method : 'GET'} )
     index : () => remote.query('users/all', { method : 'GET'}),
-    retrieve : (id) => remote.query('users', { method : 'GET', params: {id} })
+    // retrieve : (id) => remote.query('users', { method : 'GET', params: {id} })
+    retrieve : (id) => remote.query('solve', { method : 'GET', params: {id} })
 });
 
 const chunk = (arr, chunkSize, result = []) => {
@@ -24,9 +25,10 @@ const WordCard = (props) => {
         <div className='card bg-light'>
             <img className='card-img-top img-fluid' src={cardImage} alt='Card top'/>
             <div className='card-body'>
-                <h5 className='card-title'>{props.name}</h5>
+                <h5 className='card-title'>{props.word}</h5>
                 <p className='card-text'>
-                    Lorem ipsum dolor sit amet. Duis tellus.
+                    {/* Lorem ipsum dolor sit amet. Duis tellus. */}
+                    {props.definition}
                 </p>
                 <div className='btn btn-secondary'>
                     See definition
@@ -40,12 +42,12 @@ const WordCard = (props) => {
 
 // Change col col-md-x to set grid params
 const WordList = (props) => {
-    const wordsChunks = chunk(props.words, 3);
+    const wordsChunks = chunk(props.entries, 3);
     const rows = wordsChunks.map((wordsChunk, index) => {
-        const wordCols = wordsChunk.map((word) => {
+        const wordCols = wordsChunk.map((entry) => {
             return (
-                <div className='col col-sm-4' key={word.id}>
-                    <WordCard key={word.id} name={word.name} />
+                <div className='col col-sm-4' key={entry.id}>
+                    <WordCard key={entry.id} word={entry.word} definition={entry.definition} />
                 </div>
             );
         }); 
@@ -70,10 +72,10 @@ function Solver() {
 
     useEffect(() => {
         console.log(input);
+        //const timeOutId = setTimeOut(() => setDisplayMessage(input), 500);
         if (input !== '') {
             api.retrieve(input)
                 .then((results) => {
-                console.log(results);
                 setResults(results);
             });
             console.log(results);
@@ -90,7 +92,7 @@ function Solver() {
     // function 
 
     return (
-        <div className="solver mt-2">
+        <div className="solver mt-3">
             <div className="text-center">
                 <h1 className="text-bolder">Solver</h1>
                 <p className="mx-auto w-75">
@@ -123,7 +125,7 @@ function Solver() {
             
             <div className='container mt-5'> 
                 {(results?.length) ? 
-                    (<WordList words={results} /> )    
+                    (<WordList entries={results} /> )    
                     :
                     (<div className={'list-group-item p-3 list-group-item-secondary text-muted'}>
                         No Solutions

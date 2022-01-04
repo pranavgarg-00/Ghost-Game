@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const usersController = require('../controllers/usersController');
+const solverController = require('../controllers/solverController');
 const notFoundHandler = require('../middleware/notFoundHandler');
 
 const router = new express.Router;
@@ -18,6 +19,9 @@ function routers({ publicPath } = {}, logger) {
     router.get('/api/users/all', usersController.index);
     router.put('/api/users/:id', usersController.update);
     router.delete('/api/users/:id', usersController.destroy);
+
+    router.get('/api/solve', solverController.retrieve);
+    // router.get('/api/solve/all', solverController.index);    
     router.use('/api', notFoundHandler());
     router.get('*', express.static(publicPath));
     router.use(file(path.join(publicPath, "index.html")));
