@@ -9,7 +9,6 @@ The solver I've implemented was inspired by the countless number of losses I've 
 of a fellow student, we've implemented a solution that implements a dictionary-based trie search to find winning moves, 
 i.e forcing moves that make your opponent complete a word.
 
-I built the Application on the PERN Stack (PostgreSQL, Express, React, Node). The application is currently fully functional,   
-with the next step being to deploy on Heroku 
+I built the Application on the PERN Stack (PostgreSQL, Express, React, Node). The application is currently fully functional, with the next step being to deploy on Heroku 
 
 **Ghost Summary**
