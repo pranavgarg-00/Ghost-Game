@@ -18,7 +18,7 @@ This Web Application is built on the PERN Stack (PostgreSQL, Express, React, Nod
 
 Step 1) Clone this repository using `git clone https://github.com/pranavgarg-00/Ghost-Game.git`.
 
-Step 2) Create a file named `.env` at [/](/). Copy the contents of [/.env.example](/.env.example) in it and update DB_USER.
+Step 2) Create a file named `.env`. Copy the contents of [/.env.example](/.env.example) in it and update DB_USER.
 
 Step 3) In a terminal, navigate to this project's folder and run `yarn`.
 
@@ -26,6 +26,8 @@ Step 4) In the same terminal, run `yarn run dev`. Leave that running.
 
 Step 5) In a separate terminal, navigate to [/client](/client), and run `yarn`.
 
-Step 6) In this second terminal, run `yarn run start`. The web app should be running on your browser.
+Step 6) In this second terminal, run `yarn run build`.
+
+Step 7) Then, in this second terminal, run `yarn run start`. The web app should be running on your browser.
 
 
