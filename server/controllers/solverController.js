@@ -14,7 +14,8 @@ for (i in dict) {
 console.log("Built dictionary in memory.");
 
 //python create_trie.py dictname
-// const pythonCreateTrie = spawn('python', [path.resolve("server/scripts/create_trie.py"), "server/dictionary/words.txt"]);
+const { spawn } = require('child_process');
+const pythonCreateTrie = spawn('python3', [path.resolve("server/scripts/create_trie.py"), "server/dictionary/words.txt"]);
 
 const runPy = (id) => {
     return new Promise((success, nosuccess) => {

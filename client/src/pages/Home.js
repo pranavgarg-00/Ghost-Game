@@ -26,12 +26,12 @@ function Home() {
                             vice versa. 
                         </p>
                         <p>
-                            The solver I've implemented was inspired by the countless 
-                            number of losses I've had to my sister, and with the help 
-                            of a fellow CS Student @Pranav Garg, we've implemented a 
-                            solution that implements a dictionary-based trie search to
-                            find winning moves, i.e forcing moves that make your opponent
-                            complete a word.
+                            As we can see, the goal of player 1 is to make sure the final word is of 
+                            even length, while player 2 wants it to be odd length. While in real life we 
+                            vary the starting letters upon each run of the game, there are only two starting
+                            letters in which player 1 can force a victory. In the rest of them, player 2 wins
+                            with optimal play. 
+                            Try playing with the solver to figure out the two letters!
                         </p>
                     </div>
                 </div>    
